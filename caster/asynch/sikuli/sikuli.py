@@ -8,6 +8,7 @@ from caster.lib import settings, utilities
 from caster.lib.dfplus.merge import gfilter
 from caster.lib.dfplus.merge.mergerule import MergeRule
 
+
 grammar = None
 server_proxy = None
 _NEXUS = control.nexus()
@@ -15,14 +16,14 @@ _NEXUS = control.nexus()
 
 def launch_IDE():
     Popen([
-        settings.SETTINGS["paths"]["SIKULI_COMPATIBLE_JAVA_EXE_PATH"], "-jar",
+                "-jar", settings.SETTINGS["paths"]["SIKULI_JAR_PATH"]])
         settings.SETTINGS["paths"]["SIKULI_IDE_JAR_PATH"]
     ])
 
 
 def launch_server():
     Popen([
-        settings.SETTINGS["paths"]["SIKULI_COMPATIBLE_JAVA_EXE_PATH"], "-jar",
+                "-jar", settings.SETTINGS["paths"]["SIKULI_JAR_PATH"],
         settings.SETTINGS["paths"]["SIKULI_SCRIPTS_JAR_PATH"], "-r",
         settings.SETTINGS["paths"]["SIKULI_SERVER_PATH"]
     ])
@@ -113,3 +114,6 @@ def refresh(_NEXUS):
 
 if settings.SETTINGS["miscellaneous"]["sikuli_enabled"]:
     refresh(_NEXUS)
+
+        
+
