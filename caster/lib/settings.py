@@ -196,6 +196,7 @@ _DEFAULT_SETTINGS = {
         "again": True,
         "alias": True,
         "chainalias": True,
+        "caster_api_debug": False,
     },
 
     # node rules
