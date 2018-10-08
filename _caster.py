@@ -11,6 +11,11 @@ import time
 from dragonfly import (Key, Function, Grammar, Playback, Dictation, Choice, Pause)
 from caster.lib.ccr.standard import SymbolSpecs
 
+import sys
+sys.path.append('C:\\Program Files\\Brainwy\\PyVmMonitor 1.1.2\\public_api')
+import pyvmmonitor
+pyvmmonitor.connect()
+@pyvmmonitor.profile_method
 
 def _wait_for_wsr_activation():
     count = 1
@@ -58,7 +63,6 @@ from caster.user.filters.examples import scen4, modkeysup
 from caster import user
 from caster.lib.dfplus.merge.mergerule import MergeRule
 from caster.lib.dfplus.merge import gfilter
-
 
 def change_monitor():
     if settings.SETTINGS["miscellaneous"]["sikuli_enabled"]:
