@@ -5,7 +5,8 @@ import threading
 import shlex
 
 from dragonfly import (Function, Key, BringApp, Text, WaitWindow, Dictation, Choice,
-                       Grammar, MappingRule, Paste)
+                       Grammar, MappingRule, CompoundRule, Paste, get_engine)
+
 
 from caster.lib import utilities, settings, context, control
 from caster.lib.dev import devgen
@@ -122,6 +123,19 @@ def launch_url(url):
         path = command.replace('%1', url)
         Popen(shlex.split(path))
 
+def gen():
+    specs = []
+    grammar = []
+    get_engine().grammars
+    for grammar in get_engine().grammars:
+        for rule in grammar.rules:
+            if isinstance(rule, CompoundRule):
+                specs.append(rule.spec)
+            elif isinstance(rule, MappingRule):
+                specs.extend(rule.specs)
+        pass
+    print specs
+
 class DevelopmentHelp(MappingRule):
     mapping = {
         # caster development tools
@@ -141,6 +155,8 @@ class DevelopmentHelp(MappingRule):
             Function(testrunner.run_tests),
         "run remote debugger":
             Function(run_remote_debugger),
+        "Jen spec":
+            R(Function(gen), rdescript="Generate spec"),
     }
     extras = [
         Dictation("text"),
